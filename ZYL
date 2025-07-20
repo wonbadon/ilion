@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta name="google-site-verification" content="TZ3ufvqOb1fVPMawKyCjgPZAhIt6IS_N2PmIwKsFZ1I" />
+    <meta name="description" content="鄭一良建築師事務所，提供建築設計、監造與都市規劃服務。專業與創新兼具的建築團隊。">
+    <meta name="keywords" content="鄭一良, 建築師, 建築設計, 建築事務所, 台灣建築">
+    <meta name="author" content="鄭一良建築師事務所">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鄭一良建築師事務所 | 永續建築設計</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;700&display=swap');
+        
+        :root {
+            --bg-dark: #121212;
+            --bg-card: #1f2937;
+            --text-light: #e5e7eb;
+            --text-muted: #9ca3af;
+            --accent-glow: #4ade80;
+            --border-dark: #374151;
+        }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+        
+        .serif { font-family: 'Noto Serif TC', serif; }
+
+        .tech-glow {
+            transition: box-shadow 0.4s ease, transform 0.3s ease;
+            box-shadow: 0 0 15px rgba(74, 222, 128, 0);
+        }
+        .tech-glow:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(74, 222, 128, 0.25), 0 0 10px rgba(74, 222, 128, 0.15);
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-glow);
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+        
+        .hero-text {
+            animation: fadeInUp 1.5s ease forwards;
+            opacity: 0;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .menu-open { overflow: hidden; }
+        
+        .slideshow { position: absolute; inset: 0; z-index: 0; }
+        .slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            overflow: hidden;
+        }
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.15);
+            animation: kenburns 10s infinite;
+        }
+        @keyframes kenburns {
+            0% { transform: scale(1.15) translate(0, 0); }
+            100% { transform: scale(1) translate(-3%, 2%); }
+        }
+        .slide.active { opacity: 1; }
+        
+        .slide-caption {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-family: 'Noto Serif TC', serif;
+            letter-spacing: 0.05em;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+            line-height: 1.4;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease 0.8s, transform 0.5s ease 0.8s;
+            text-align: right;
+        }
+        .slide.active .slide-caption {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .map-dark { filter: invert(1) hue-rotate(180deg) contrast(0.9); }
+    </style>
+</head>
+<body>
+    
+    <!-- 導航欄 -->
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-500" id="navbar">
+        <div class="container mx-auto px-4 py-6 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-gray-100 flex items-center space-x-2 group">
+                <span style="color: var(--accent-glow);" class="transition-transform duration-500 group-hover:rotate-45">鄭一良</span>
+                <span class="text-sm font-normal hidden md:inline-block">建築師事務所</span>
+            </a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#about" class="nav-link text-gray-300 hover:text-white">關於我們</a>
+                <a href="#awards" class="nav-link text-gray-300 hover:text-white">榮譽獎項</a>
+                <a href="#philosophy" class="nav-link text-gray-300 hover:text-white">設計理念</a>
+                <a href="#contact" class="nav-link text-gray-300 hover:text-white">聯絡我們</a>
+            </nav>
+            <button class="md:hidden text-gray-100 text-2xl" id="menu-toggle"><i class="fas fa-bars"></i></button>
+        </div>
+    </header>
+    
+    <!-- 移動端選單 -->
+    <div class="fixed inset-0 bg-gray-950 bg-opacity-95 z-50 transform translate-x-full transition-transform duration-500" id="mobile-menu">
+        <div class="container mx-auto px-4 py-6 flex justify-end">
+            <button class="text-gray-200 text-2xl" id="menu-close"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="flex flex-col items-center justify-center h-full space-y-8 -mt-16">
+            <a href="#about" class="text-gray-200 text-2xl hover:text-green-400 mobile-link">關於我們</a>
+            <a href="#awards" class="text-gray-200 text-2xl hover:text-green-400 mobile-link">榮譽獎項</a>
+            <a href="#philosophy" class="text-gray-200 text-2xl hover:text-green-400 mobile-link">設計理念</a>
+            <a href="#contact" class="text-gray-200 text-2xl hover:text-green-400 mobile-link">聯絡我們</a>
+        </div>
+    </div>
+    
+    <!-- 英雄區塊 -->
+    <section id="hero" class="relative h-screen flex items-center justify-center overflow-hidden bg-black">
+        <div class="slideshow absolute inset-0 z-0">
+            <div class="slide active"><img src="https://i.postimg.cc/5tBJ5XNr/14866.jpg" alt="興陽忠正案建築外觀"><div class="slide-caption">興陽忠正案</div></div>
+            <div class="slide"><img src="https://i.postimg.cc/0QZq3hSd/14868.jpg" alt="興陽忠正案建築細節"><div class="slide-caption">興陽忠正案</div></div>
+        </div>
+        <div class="absolute inset-0 z-5 bg-black bg-opacity-50"></div>
+        <div class="container mx-auto px-4 z-10 text-center">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 hero-text serif text-white" style="animation-delay: 0.3s">
+                <span style="color: var(--accent-glow);">構築</span>人與自然的
+                <span class="block">深度<span style="color: var(--accent-glow);">連結</span></span>
+            </h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-10 text-gray-300 hero-text" style="animation-delay: 0.6s">
+                透過精準的設計，我們將地景、光線與永續策略融合，為每個空間注入生命力。
+            </p>
+            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6 hero-text" style="animation-delay: 0.9s">
+                <a href="#awards" style="background-color: var(--accent-glow);" class="text-gray-900 font-semibold px-8 py-3 rounded-full transition-all duration-300 transform hover:-translate-y-1 hover:brightness-110">近期獲獎</a>
+                <a href="#contact" class="border border-gray-400 hover:border-white hover:bg-white hover:text-gray-900 text-white px-8 py-3 rounded-full transition-all duration-300 transform hover:-translate-y-1">聯絡我們</a>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#awards" class="text-white text-2xl"><i class="fas fa-chevron-down"></i></a>
+        </div>
+    </section>
+
+    <!-- 榮譽獎項 -->
+    <section id="awards" class="py-20 md:py-32 relative overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 md:mb-24 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 serif text-gray-100">榮譽<span style="color: var(--accent-glow);">獎項</span></h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto">我們對卓越設計的承諾，體現在每一個備受肯定的作品中。</p>
+            </div>
+            <div class="space-y-20 md:space-y-32">
+                <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center reveal">
+                    <div class="relative tech-glow rounded-lg"><img src="https://i.postimg.cc/Kzkkf7wN/unnamed-2.png" alt="建築園冶獎" class="w-full h-auto rounded-lg bg-white p-4"></div>
+                    <div class="md:pl-8">
+                        <span class="block text-lg font-semibold serif mb-2" style="color: var(--accent-glow);">2024</span>
+                        <h3 class="text-3xl md:text-4xl serif font-bold mb-3 text-gray-100">建築園冶獎</h3>
+                        <p class="text-xl text-gray-400 mb-6">屏東縣公共建築類</p>
+                        <div class="border-t pt-6 space-y-3 text-gray-300" style="border-color: var(--border-dark);">
+                            <p><strong>得獎作品：</strong> 屏東縣動物之家</p>
+                            <p><strong>規劃設計監造：</strong> 鄭一良建築師事務所</p>
+                            <p><strong>主辦單位：</strong> 社團法人高雄市建築經營協會</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center reveal">
+                    <div class="md:order-last relative tech-glow rounded-lg"><img src="https://i.postimg.cc/t4qz5f5N/image.png" alt="國家卓越建設獎" class="w-full h-auto rounded-lg bg-white p-4"></div>
+                    <div class="md:pr-8">
+                        <span class="block text-lg font-semibold serif mb-2" style="color: var(--accent-glow);">2024</span>
+                        <h3 class="text-3xl md:text-4xl serif font-bold mb-3 text-gray-100">國家卓越建設獎</h3>
+                        <p class="text-xl text-gray-400 mb-6">金質獎 / 最佳規劃設計類 公共建設類</p>
+                         <div class="border-t pt-6 space-y-3 text-gray-300" style="border-color: var(--border-dark);">
+                            <p>此獎項肯定了我們在公共建設領域中，對規劃設計的卓越追求與創新實踐。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 關於我們 -->
+    <section id="about" class="py-20 md:py-32" style="background-color: #1a1a1a;">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 flex items-center serif text-gray-100"><span class="w-10 h-1 mr-4" style="background-color: var(--accent-glow);"></span>關於我們</h2>
+                    <p class="text-lg text-gray-300 mb-6">自2010年成立以來，鄭一良建築師事務所始終是永續建築與生態設計的實踐者。</p>
+                    <p class="text-lg text-gray-300 mb-8">我們的實踐根植於對基地環境的深刻理解，從都市紋理到自然地景，每個項目都是一次對在地脈絡的回應。透過跨領域的整合與材料研究，我們致力於提出兼具前瞻性與實用性的建築方案。</p>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="border-l-2 pl-4" style="border-color: var(--accent-glow);"><p class="text-4xl font-bold" style="color: var(--accent-glow);">50+</p><p class="text-gray-400">完成項目</p></div>
+                        <div class="border-l-2 pl-4" style="border-color: var(--accent-glow);"><p class="text-4xl font-bold" style="color: var(--accent-glow);">15</p><p class="text-gray-400">綠建築認證</p></div>
+                    </div>
+                </div>
+                <div class="relative reveal h-[500px]">
+                    <div class="absolute inset-0 tech-glow">
+                        <img src="https://i.postimg.cc/P5pd6mj3/14871.jpg" alt="首席建築師 鄭一良" class="w-full h-full object-cover rounded-lg">
+                    </div>
+                     <div class="absolute -bottom-4 -right-4 p-4 rounded-lg shadow-xl" style="background-color: var(--bg-card);">
+                        <p class="text-lg font-bold serif text-white">鄭一良</p>
+                        <p class="text-sm text-gray-400">首席建築師</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 設計理念 -->
+    <section id="philosophy" class="py-20 md:py-32 relative overflow-hidden">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl mx-auto text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 serif text-gray-100">設計<span style="color: var(--accent-glow);">哲學</span></h2>
+                <p class="text-lg text-gray-400">我們的設計哲學，建立在理性的分析與感性的關懷之上，追求建築、環境與使用者三者的動態平衡。</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="rounded-lg tech-glow reveal flex flex-col" style="background-color: var(--bg-card); transition-delay: 0.1s">
+                    <div class="h-60 overflow-hidden rounded-t-lg">
+                        <!-- 已更新圖片 -->
+                        <img src="https://i.postimg.cc/kgJQ64qJ/Flux-Dev-interior-architectural-photography-of-a-university-li-3.jpg" alt="生態整合的建築概念圖" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                    </div>
+                    <div class="p-8 flex-grow flex flex-col"><h3 class="text-xl font-bold mb-4 serif text-white">生態整合</h3><p class="text-gray-400 flex-grow">我們不僅止於低環境衝擊，更追求創造具有生態效益的建築。透過被動式設計、生物多樣性策略與在地材料的應用，讓建築成為支持周遭生態系的一部分。</p></div>
+                </div>
+                <div class="rounded-lg tech-glow reveal flex flex-col" style="background-color: var(--bg-card); transition-delay: 0.3s">
+                    <div class="h-60 overflow-hidden rounded-t-lg">
+                        <!-- 已更新圖片 -->
+                        <img src="https://i.postimg.cc/jjCycFDB/Flux-Dev-A-3-D-architectural-model-of-a-contemporary-building-s-1.jpg" alt="建築能源效能概念圖" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                    </div>
+                    <div class="p-8 flex-grow flex flex-col"><h3 class="text-xl font-bold mb-4 serif text-white">效能最適化</h3><p class="text-gray-400 flex-grow">建築的生命週期效能是我們的核心考量。我們運用能源模擬、再生能源系統與智慧化管理，目標是最大化資源利用效率，趨近於淨零碳的理想。</p></div>
+                </div>
+                <div class="rounded-lg tech-glow reveal flex flex-col" style="background-color: var(--bg-card); transition-delay: 0.5s">
+                    <div class="h-60 overflow-hidden rounded-t-lg">
+                        <!-- 已更新圖片 -->
+                        <img src="https://i.postimg.cc/rwTk5BPF/Flux-Dev-photorealistic-interior-rendering-of-a-spacious-commu-0.jpg" alt="以人為本的空間體驗概念圖" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                    </div>
+                    <div class="p-8 flex-grow flex flex-col"><h3 class="text-xl font-bold mb-4 serif text-white">空間體驗塑造</h3><p class="text-gray-400 flex-grow">建築的最終目的是服務於人。我們專注於光線的品質、空間的尺度與材料的觸感，創造能觸發情感、促進健康福祉並凝聚社群意識的場所。</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 聯絡我們 -->
+    <section id="contact" class="py-20 md:py-32">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 flex items-center serif text-gray-100"><span class="w-10 h-1 mr-4" style="background-color: var(--accent-glow);"></span>聯絡我們</h2>
+                    <p class="text-lg text-gray-400 mb-8">我們期待與您共同探討下一個具備創新與永續視野的建築項目。歡迎隨時與我們聯繫。</p>
+                    <div class="space-y-6">
+                        <div class="flex items-start"><div class="w-12 h-12 flex items-center justify-center mr-4 shrink-0 rounded-full" style="background-color: var(--bg-card);"><i class="fas fa-map-marker-alt" style="color: var(--accent-glow);"></i></div><div><h3 class="text-lg font-bold mb-1 serif text-white">地址</h3><p class="text-gray-400"> 900屏東縣屏東市濟南街7號</p></div></div>
+                        <div class="flex items-start"><div class="w-12 h-12 flex items-center justify-center mr-4 shrink-0 rounded-full" style="background-color: var(--bg-card);"><i class="fas fa-phone" style="color: var(--accent-glow);"></i></div><div><h3 class="text-lg font-bold mb-1 serif text-white">電話</h3><p class="text-gray-400">+886 733 5713</p></div></div>
+                        <div class="flex items-start"><div class="w-12 h-12 flex items-center justify-center mr-4 shrink-0 rounded-full" style="background-color: var(--bg-card);"><i class="fas fa-envelope" style="color: var(--accent-glow);"></i></div><div><h3 class="text-lg font-bold mb-1 serif text-white">電子郵件</h3><p class="text-gray-400">lilang.a333333@gmail.com</p></div></div>
+                    </div>
+                </div>
+                <div class="reveal h-96 lg:h-full w-full rounded-lg overflow-hidden tech-glow">
+                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3678.960228026131!2d120.4859815759714!3d22.691764927236528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e17e35183318b%3A0x633519525164808c!2zOTAw5b2M5p2x57ij5b2M5p2x5biC5r-p5Y2X6KGXNw!5e0!3m2!1szh-TW!2stw!4v1721300976258!5m2!1szh-TW!2stw&q=900屏東縣屏東市濟南街7號" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="鄭一良建築師事務所地圖位置" class="map-dark"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 頁尾 -->
+    <footer class="border-t py-8" style="background-color: #1a1a1a; border-color: var(--border-dark);">
+        <div class="container mx-auto px-4 text-center">
+            <a href="#" class="text-xl font-bold text-gray-100 flex items-center justify-center space-x-2 mb-2 group"><span class="transition-transform duration-500 group-hover:rotate-45" style="color: var(--accent-glow);">鄭一良</span><span class="text-sm font-normal">建築師事務所</span></a>
+            <p class="text-gray-400 text-sm max-w-md mx-auto mb-4">構築人與自然的深度連結</p>
+            <p class="text-gray-500 text-xs">© 2024 鄭一良建築師事務所. 版權所有.</p>
+        </div>
+    </footer>
+    
+    <script>
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            for (let i = 0; i < reveals.length; i++) {
+                if (reveals[i].getBoundingClientRect().top < window.innerHeight - 100) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        
+        function handleNavbar() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-gray-950/80', 'backdrop-blur-sm', 'shadow-lg');
+                navbar.classList.remove('py-6');
+                navbar.classList.add('py-4');
+            } else {
+                navbar.classList.remove('bg-gray-950/80', 'backdrop-blur-sm', 'shadow-lg');
+                navbar.classList.add('py-6');
+                navbar.classList.remove('py-4');
+            }
+        }
+        
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.remove('translate-x-full');
+            document.body.classList.add('menu-open');
+        });
+        
+        document.getElementById('menu-close').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.add('translate-x-full');
+            document.body.classList.remove('menu-open');
+        });
+        
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('translate-x-full');
+                document.body.classList.remove('menu-open');
+            });
+        });
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            let currentSlide = 0;
+            if (slides.length === 0) return;
+            function showSlide(index) {
+                slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+            }
+            showSlide(currentSlide);
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }, 5000);
+        });
+        
+        window.addEventListener('scroll', reveal);
+        window.addEventListener('scroll', handleNavbar);
+        window.addEventListener('load', reveal);
+        window.addEventListener('load', handleNavbar);
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
